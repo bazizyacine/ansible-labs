@@ -1,7 +1,18 @@
 ---
 - hosts: worker
   tasks:
-  - name: Installation du serveur web apache
+  - name: Installation des pakages {{ item }}
     yum:
-      name: httpd
+      name: "{{ item }}"
       state: present
+    when: ansible_distribution == "CentOS"
+    loop:
+      - httpd
+      - epel-release
+      - vim
+      - htop        
+  - name: Demmarrage et activation du service apache (httpd)
+    systemd:
+      name: httpd
+      state: started
+      enabled: yes

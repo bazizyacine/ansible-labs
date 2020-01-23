@@ -1,0 +1,14 @@
+---
+- hosts: worker
+  vars:
+    user:
+      - ludo
+      - celine
+      - yassine
+      - sarah 
+  tasks:
+  - name: Creation d'utilisateurs "{{ user }}"
+    user:
+      name: "{{ item }}"
+  loop:
+    "{{ user }}"

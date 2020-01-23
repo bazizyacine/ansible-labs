@@ -1,14 +1,15 @@
 ---
 - hosts: worker
-  vars:
-    user:
-      - ludo
-      - celine
-      - yassine
-      - sarah 
-  tasks:
-  - name: Creation d'utilisateurs "{{ user }}"
+  vars_files:
+    user_vars.yml 
+  tasks:        
+  - name: Ajout des groups {{ groupe }}
+    group:
+      name: "{{ item }}"
+    loop:
+      "{{ groupe }}"
+  - name: Creation d'utilisateurs {{ user }}
     user:
       name: "{{ item }}"
-  loop:
-    "{{ user }}"
+    loop:
+      "{{ user }}"

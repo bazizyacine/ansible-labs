@@ -1,0 +1,7 @@
+---
+- hosts: worker
+  tasks:
+  - name: Installation du serveur web apache
+    yum:
+      name: httpd
+      state: present

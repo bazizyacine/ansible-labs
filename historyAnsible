@@ -1,0 +1,218 @@
+    1  yum install -y -q epel-release
+    2  yum info ansible
+    3  ls /etc/yum.repos.d/epel*
+    4  yum install -y -q ansible
+    5  ansible -h
+    6  ansible --version
+    7  ls
+    8  cat /etc/hosts
+    9  pwd
+   10  ansible -m ping -h
+   11  ansible -h
+   12  ansible -m ping workerAnsible1
+   13  vi inventaire
+   14  ansible -m ping -i inventaire 172.42.42.101
+   15  ansible -m ping -i inventaire 172.42.42.101 -k
+   16  ansible -k -h
+   17  yum install -y git
+   18  git clone https://github.com/bazizyacine/ansible-labs.git
+   19  ls
+   20  mv inventaire  ansible-labs/
+   21  cd ansible-labs/
+   22  ls
+   23  vim inventaire 
+   24  vi inventaire 
+   25  ansible -m ping -i inventaire worker -k
+   26  ssh 172.42.42.102 
+   27  ls
+   28  ansible -m ping -i inventaire worker -k
+   29  ls
+   30  ls -a
+   31  git add .
+   32  git commit -m "lab1"
+   33  git push
+   34  ls .ssh/
+   35  ls .ssh
+   36  ls .ssh/
+   37  cd ..
+   38  ls .ssh/known_hosts
+   39  ls
+   40  cd ansible-labs/
+   41  ssh-keygen
+   42  ssh-copy-id 172.42.42.101
+   43  ssh-copy-id 172.42.42.102
+   44  ls ../.ssh/
+   45  cat ../.ssh/known_hosts 
+   46  ansible -m ping -i inventaire 172.42.42.101
+   47  ssh-keygen
+   48  ssh-copy-id 172.42.42.102
+   49  ssh-copy-id 172.42.42.101
+   50  ansible -m ping -i inventaire 172.42.42.101
+   51  ssh-agent -h
+   52  ssh-agent $SHELL
+   53  sd
+   54  ssh-add
+   55  ansible -m ping -i inventaire 172.42.42.101
+   56  history
+   57  ssh-agent -h
+   58  ansible -m ping -i inventaire worker
+   59  ansible -i inventaire -m yum -a "name=httpd state=present" worker
+   60  yum -a -h
+   61  yum -h
+   62  ansible -i inventaire -m yum -a "name=httpd state=absent" worker
+   63  ansible -h
+   64  ansible -i inventaire -m yum -a "name=httpd state=present" worker
+   65  ansible -i inventaire -m systemd -a "name=httpd state=started" worker
+   66  ansible -i inventaire -m systemd -a "name=httpd state=stoped" worker
+   67  ansible -i inventaire -m systemd -a "name=httpd state=stopped" worker
+   68  ansible -i inventaire -m systemd -a "name=httpd state=restarted" worker
+   69  yum install -y vim && vim httpd.yml
+   70  ansible -playbook -h
+   71  ansible-playbook -h
+   72  ls /etc/ansible/
+   73  cp /etc/ansible/ansible.cfg /etc/ansible/ansible_old.cfg 
+   74  vim /etc/ansible/ansible.cfg
+   75  ansible-playbook -h
+   76  ansible-playbook --syntax-check httpd.yml 
+   77  vim /etc/ansible/hosts 
+   78  cp /etc/ansible/hosts /etc/ansible/hosts_old
+   79  vim /etc/ansible/hosts 
+   80  cat /etc/ansible/hosts 
+   81  ansible -i inventaire -m setup worker | grep ansible_hostname
+   82  ansible -i inventaire -m setup -h
+   83  ansible -i inventaire -m setup worker | grep '"ansible_distribution"'
+   84  ansible -i inventaire -m setup worker
+   85  ansible -i inventaire -m setup -h
+   86  vim httpd.yml 
+   87  ansible-playbook --syntax-check httpd.yml
+   88  ansible-playbook httpd.yml
+   89  vim httpd.yml 
+   90  ansible-playbook httpd.yml
+   91  ls
+   92  git add .
+   93  git commit -m "lab2"
+   94  git push
+   95  vim httpd.yml 
+   96  ansible-playbook httpd.yml
+   97  vim httpd.yml 
+   98  ansible-playbook httpd.yml
+   99  vim httpd.yml 
+  100  ansible-playbook -m systemd started httpd.yml
+  101  vim httpd.yml 
+  102  ansible-playbook -m systemd started httpd.yml
+  103  ansible -m systemd started httpd.yml
+  104  history
+  105  ansible-playbook -m systemd -a "name=httpd state=started" httpd.yml
+  106  ansible -m systemd -a "name=httpd state=started" httpd.yml
+  107  ansible-playbook httpd.yml
+  108  vim httpd.yml 
+  109  ansible-playbook --syntax-check httpd.yml
+  110  ansible-playbook httpd.yml
+  111  ansible-playbook --syntax-check httpd.yml
+  112  ansible-playbook httpd.yml
+  113  vim httpd.yml 
+  114  ansible-playbook httpd.yml
+  115  history
+  116  ansible -i inventaire -m setup worker
+  117  ansible -i inventaire -m setup worker | more
+  118  history
+  119  ansible -i inventaire -m setup worker | grep '"ansible_distribution"' | more
+  120  vim httpd.yml 
+  121  vim httpd.yml
+  122  ansible-playbook --syntax-check httpd.yml
+  123  ansible-playbook httpd.yml
+  124  vim httpd.yml
+  125  ansible-playbook httpd.yml
+  126  cat httpd.yml 
+  127  vim httpd.yml 
+  128  ansible-playbook --syntax-check httpd.yml
+  129  ansible-playbook httpd.yml
+  130  ansible-playbook httpd.yml
+  131  vim httpd.yml 
+  132  ansible-playbook --syntax-check httpd.yml
+  133  vim httpd.yml 
+  134  ansible-playbook httpd.yml
+  135  vim httpd.yml 
+  136  ansible-playbook httpd.yml
+  137  vim httpd.yml 
+  138  ansible-playbook httpd.yml
+  139  vim httpd.yml 
+  140  ansible-playbook --syntax-check httpd.yml
+  141  ansible-playbook httpd.yml
+  142  vim httpd.yml 
+  143  ansible -i inventaire -m setup worker | grep '"ansible_distribution"' | more
+  144  vim httpd.yml 
+  145  ansible-playbook --syntax-check httpd.yml
+  146  ansible-playbook httpd.yml
+  147  vim httpd.yml 
+  148  ansible-playbook httpd.yml
+  149  cat httpd.yml 
+  150  vim user.yml 
+  151  cat /etc/default/useradd 
+  152  vim user.yml 
+  153  ansible-playbook --syntax-check httpd.yml
+  154  cat user.yml
+  155  git add .
+  156  git commit -m "test"
+  157  git push
+  158  ansible-playbook httpd.yml
+  159  ansible-playbook user.yml
+  160  vim user.yml 
+  161  cat httpd.yml 
+  162  vim user.yml 
+  163  ansible-playbook httpd.yml
+  164  ansible-playbook user.yml
+  165  cat httpd.yml 
+  166  vim user.yml 
+  167  ansible-playbook --syntax-check user.yml
+  168  vim user.yml
+  169  vim user_vars.yml
+  170  ansible-playbook user.yml
+  171  vim user.yml
+  172  vim httpd.yml 
+  173  vim user.yml
+  174  vim user_vars.yml 
+  175  ansible-playbook --syntax-check user.yml
+  176  ansible-playbook --syntax-check user_vars.yml
+  177  vim user_vars.yml 
+  178  ansible-playbook --syntax-check user_vars.yml
+  179  vim user_vars.yml 
+  180  ansible-playbook --syntax-check user_vars.yml
+  181  ansible-playbook user.yml
+  182  vim user_vars.yml 
+  183  ansible-playbook --syntax-check user_vars.yml
+  184  cat user.yml 
+  185  vim user_vars.yml 
+  186  ansible-playbook --syntax-check user_vars.yml
+  187  vim user_vars.yml 
+  188  vim user.yml 
+  189  vim user_vars.yml 
+  190  ansible-playbook --syntax-check user_vars.yml
+  191  ansible-playbook --syntax-check user.yml 
+  192  ansible-playbook user.yml
+  193  vim user_vars.yml 
+  194  vim user.yml 
+  195  ansible-playbook --syntax-check user.yml 
+  196  ansible-playbook user.yml
+  197  vim user.yml 
+  198  git add .
+  199  git commit -m "test"
+  200  git push
+  201  sudo /sbin/vboxconfig
+  202  ls
+  203  cd ansible-labs/
+  204  ls
+  205  ansible-playbook user.yml
+  206  history
+  207  ssh-agent
+  208  ansible-playbook httpd.yml 
+  209  sshadd
+  210  ssh-add
+  211  ssh-add -l
+  212  ssh-agent
+  213  ssh-agent -h
+  214  history
+  215  ls
+  216  cd ansible-labs/
+  217  history
+  218  history > historyAnsible

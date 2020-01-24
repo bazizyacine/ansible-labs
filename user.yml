@@ -1,15 +1,29 @@
 ---
 - hosts: worker
   vars_files:
-    user_vars.yml 
-  tasks:        
-  - name: Ajout des groups {{ groupe }}
+    user_vars.yml
+  tasks:
+ - name: ajout des groupes {{ groupe }}
     group:
-      name: "{{ item }}"
+     name: "{{ item }}"
     loop:
-      "{{ groupe }}"
-  - name: Creation d'utilisateurs {{ user }}
+     "{{ groupe }}"
+  - name: creation d'utilisateurs {{ user }}
     user:
-      name: "{{ item }}"
+     name: "{{ item }}"
     loop:
-      "{{ user }}"
+     "{{ user }}"
+  - name: copie des cles ssh
+    authorized_key:
+     user: "{{ item }}"
+     state: present
+     key: "{{ lookup('file', '/home/{{ item }}/.ssh/id_rsa.pub') }}"
+    loop:
+     "{{ user }}"
+  - name: ajout de {{ user }} dans sudo
+    template:
+     src: sudo.j2
+     dest: /etc/sudoers.d/{{ item }}
+     mode: 0640
+    loop:
+     "{{ user }}"

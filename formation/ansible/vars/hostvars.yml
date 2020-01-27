@@ -1,0 +1,13 @@
+---
+- hosts: worker
+  tasks:
+  - name: affiche les variables hostvars
+    debug:
+     msg: l'ipv4 de la machine est  {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}
+  - name: affiche les variables hostvars
+    debug:
+     msg: les ipv4 de la machine est  {{ hostvars[inventory_hostname]['ansible_all_ipv4_addresses'] }}
+    register: ip_output 
+  - name: afficher ip_output
+    debug:
+     var: ip_output

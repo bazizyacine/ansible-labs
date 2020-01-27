@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  tasks:
+  - name: inster vhost in nginx.conf
+    lineinfile:
+     dest: /etc/nginx/nginx.conf
+     line: include /etc/nginx/sites-enabled/*.conf;
+     insertafter: "^http {"
+     state: present
+    register: line
+  - name: debug lineinfile
+    debug:
+     var: line

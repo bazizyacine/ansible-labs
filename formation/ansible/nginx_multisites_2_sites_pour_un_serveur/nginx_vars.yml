@@ -1,0 +1,6 @@
+domain:
+ - m2i.form
+ - m2i.fr
+sites: 
+ - sites-enabled
+ - sites-available

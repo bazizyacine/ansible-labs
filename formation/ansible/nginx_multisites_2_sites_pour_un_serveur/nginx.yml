@@ -1,0 +1,64 @@
+---
+- hosts: localhost
+  vars_files:
+   nginx_vars.yml
+  tasks:
+  - name: installation epel-release
+    yum:
+     name: epel-release
+     state: latest
+    register: inst_epel
+  - name: debug inst_epel.out
+    debug:
+     var: inst_epel
+  - name: nginx install
+    yum:
+     name: nginx
+     state: latest
+  - name: create html dir
+    file:
+     path: /var/www/{{ item }}/html
+     state: directory
+     mode: 755
+     owner: nginx
+     group: nginx
+    loop:
+     "{{ domain }}"
+  - name: template index.html
+    template:
+     src: index.j2
+     dest: /var/www/{{ item }}/html/index.html
+    loop:
+     "{{ domain }}"
+  - name: creation des rep pour les conf web
+    file:
+     path: /etc/nginx/{{ item }}
+     state: directory
+    loop:
+     "{{ sites }}"
+  - name: inster vhost in nginx.conf
+    lineinfile:
+     dest: /etc/nginx/nginx.conf
+     line: include /etc/nginx/sites-enabled/*.conf;
+     insertafter: "^http {"
+     state: present
+  - name: modele pour les fichers de conf des serveurs
+    template:
+     src: conf_server.j2
+     dest: /etc/nginx/sites-available/{{ item }}.conf
+    loop:
+     "{{ domain }}"
+  - name: activation des sites {{ item }}
+    file:
+     path: /etc/nginx/sites-enabled/{{ item }}
+     state: directory
+    loop:
+     "{{ domain }}"
+  - name: demarrage du service nginx
+    systemd:
+     name: nginx
+     state: started
+  - name:
+    file:
+     path: /tmp/test
+     state: present

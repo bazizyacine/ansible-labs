@@ -1,0 +1,8 @@
+---
+#1. Cette tâche installe PHP7 et ses extensions
+- name: "install php70 packages"
+  yum:
+    name: "php,php-mysql,php-xml,php-mbstring,php-gd,php-intl"    
+    state: latest
+  changed_when: yes
+  notify: [ "apache restart" ]
